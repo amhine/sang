@@ -11,7 +11,7 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4 text-danger">🩸 Formulaire de Donneur</h2>
 
-    <form action="${pageContext.request.contextPath}/donneur" method="post" class="card p-4 shadow-sm">
+    <form action="${pageContext.request.contextPath}/createDonneur" method="post">
 
         <h4 class="text-danger">Informations Personnelles</h4>
         <hr>

@@ -16,7 +16,7 @@
 
     <servlet-mapping>
         <servlet-name>DonneurServlet</servlet-name>
-        <url-pattern>/donneur</url-pattern>
+        <url-pattern>/createDonneur</url-pattern>
     </servlet-mapping>
 
     <servlet>

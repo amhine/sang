@@ -73,7 +73,14 @@ public class DonneurServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", "Erreur lors de la création du donneur : " + e.getMessage());
-            request.getRequestDispatcher("/donneur/createDonneur.jsp").forward(request, response);
+            request.getRequestDispatcher("/createDonneur").forward(request, response);
         }
     }
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/donneur/createDonneur.jsp");
+        dispatcher.forward(request, response);
+    }
+
 }

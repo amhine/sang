@@ -20,7 +20,7 @@ public class Donneur extends User {
     private Medical medical;
 
     public Donneur() {
-        this.medical = new Medical(); // initialisation automatique
+        this.medical = new Medical();
     }
 
     public boolean isEligible() {
