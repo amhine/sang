@@ -29,5 +29,26 @@
         <url-pattern>/listDonneurs</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>EditDonneurServlet</servlet-name>
+        <servlet-class>banquesang.servlet.EditDonneurServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditDonneurServlet</servlet-name>
+        <url-pattern>/edit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteDonneurServlet</servlet-name>
+        <servlet-class>banquesang.servlet.DeleteDonneurServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteDonneurServlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+
+
+
+
 
 </web-app>

@@ -9,7 +9,12 @@
 <body class="bg-light">
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4 text-danger">🩸 Formulaire de Donneur</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-center text-danger mb-0">🩸 Formulaire de Donneur</h2>
+        <a href="${pageContext.request.contextPath}/listDonneurs" class="btn btn-danger">
+            👥 Liste des donneurs
+        </a>
+    </div>
 
     <form action="${pageContext.request.contextPath}/createDonneur" method="post">
 

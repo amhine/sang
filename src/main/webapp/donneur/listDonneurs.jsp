@@ -37,6 +37,7 @@
                         <th>Groupe Sanguin</th>
                         <th>Disponibilité</th>
                         <th>Informations Médicales</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -75,6 +76,18 @@
                                     </c:otherwise>
                                 </c:choose>
                             </td>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/edit?id=${d.id}"
+                                   class="btn btn-sm btn-primary mb-1">
+                                    ✏️ Modifier
+                                </a>
+                                <a href="${pageContext.request.contextPath}/delete?id=${d.id}"
+                                   class="btn btn-sm btn-danger"
+                                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce donneur ?');">
+                                    🗑️ Supprimer
+                                </a>
+                            </td>
+
                         </tr>
                     </c:forEach>
                     </tbody>

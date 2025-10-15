@@ -1,4 +1,4 @@
 package banquesang.Dao;
 
-public class ReceveurDAO {
+public interface ReceveurDAO {
 }
