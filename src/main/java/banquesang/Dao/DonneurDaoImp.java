@@ -1,14 +1,13 @@
-
 package banquesang.Dao;
-
 import banquesang.model.Donneur;
 import banquesang.utils.JpaUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import java.util.List;
 
-public class DonneurDaoImp {
+public class DonneurDaoImp implements DonneurDAO {
 
+    @Override
     public void save(Donneur donneur) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
@@ -17,18 +16,21 @@ public class DonneurDaoImp {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
         } finally {
             em.close();
         }
     }
 
+    @Override
     public List<Donneur> getAllDonneurs() {
         EntityManager em = JpaUtil.getEntityManager();
         List<Donneur> donneurs = null;
         try {
             TypedQuery<Donneur> query = em.createQuery(
-                    "SELECT d FROM Donneur d LEFT JOIN FETCH d.medical", Donneur.class
+                    "SELECT DISTINCT d FROM Donneur d LEFT JOIN FETCH d.medical", Donneur.class
             );
             donneurs = query.getResultList();
         } catch (Exception e) {
@@ -39,7 +41,7 @@ public class DonneurDaoImp {
         return donneurs;
     }
 
-
+    @Override
     public void update(Donneur donneur) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
@@ -48,12 +50,15 @@ public class DonneurDaoImp {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
         } finally {
             em.close();
         }
     }
 
+    @Override
     public void delete(Long id) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
@@ -65,12 +70,15 @@ public class DonneurDaoImp {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
         } finally {
             em.close();
         }
     }
 
+    @Override
     public Donneur findById(Long id) {
         EntityManager em = JpaUtil.getEntityManager();
         Donneur d = null;
@@ -83,7 +91,4 @@ public class DonneurDaoImp {
         }
         return d;
     }
-
-
-
 }

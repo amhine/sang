@@ -10,7 +10,7 @@
 
 <div class="container mt-5">
     <h2 class="text-center text-danger mb-4">✏️ Modifier Donneur</h2>
-    <form action="${pageContext.request.contextPath}/donneur" method="post">
+    <form action="${pageContext.request.contextPath}/editDonneur" method="post">
         <input type="hidden" name="action" value="update"/>
         <input type="hidden" name="id" value="${donneur.id}"/>
 

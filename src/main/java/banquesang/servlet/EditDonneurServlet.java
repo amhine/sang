@@ -51,12 +51,15 @@ public class EditDonneurServlet extends HttpServlet {
             d.setGroupeSang(GroupeSang.valueOf(request.getParameter("groupesang")));
 
             Medical m = d.getMedical();
-            m.setHepatiteB(Boolean.parseBoolean(request.getParameter("hepatiteB")));
-            m.setHepatiteC(Boolean.parseBoolean(request.getParameter("hepatiteC")));
-            m.setVih(Boolean.parseBoolean(request.getParameter("vih")));
-            m.setDiabete(Boolean.parseBoolean(request.getParameter("diabete")));
-            m.setGrossesse(Boolean.parseBoolean(request.getParameter("grossesse")));
-            m.setAllaitement(Boolean.parseBoolean(request.getParameter("allaitement")));
+            if  (m == null) {
+                m = new Medical();
+            }
+            m.setHepatiteB(request.getParameter("hepatiteB") != null);
+            m.setHepatiteC(request.getParameter("hepatiteC") != null);
+            m.setVih(request.getParameter("vih") != null);
+            m.setDiabete(request.getParameter("diabete") != null);
+            m.setGrossesse(request.getParameter("grossesse") != null);
+            m.setAllaitement(request.getParameter("allaitement") != null);
             d.setMedical(m);
 
             donneurService.modifierDonneur(d);

@@ -77,7 +77,7 @@
                                 </c:choose>
                             </td>
                             <td>
-                                <a href="${pageContext.request.contextPath}/edit?id=${d.id}"
+                                <a href="${pageContext.request.contextPath}/editDonneur?id=${d.id}"
                                    class="btn btn-sm btn-primary mb-1">
                                     ✏️ Modifier
                                 </a>

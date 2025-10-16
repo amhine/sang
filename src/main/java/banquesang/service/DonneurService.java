@@ -1,11 +1,12 @@
 package banquesang.service;
 
-import banquesang.Dao.DonneurDAO;
+import banquesang.Dao.DonneurDaoImp;
+import banquesang.Dao.DonneurDaoImp;
 import banquesang.model.Donneur;
 import java.util.List;
 
 public class DonneurService {
-    private DonneurDAO donneurDAO = new DonneurDAO();
+    private DonneurDaoImp donneurDAO = new DonneurDaoImp();
 
     public void creerDonneur(Donneur donneur) {
         donneurDAO.save(donneur);
