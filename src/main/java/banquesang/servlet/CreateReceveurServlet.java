@@ -28,7 +28,6 @@ public class CreateReceveurServlet extends HttpServlet {
         request.setAttribute("genres", Genre.values());
         request.setAttribute("groupesSang", GroupeSang.values());
         request.setAttribute("urgences", Urgence.values());
-        request.setAttribute("statuses", ReceveurStatus.values());
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/receveur/createReceveur.jsp");
         dispatcher.forward(request, response);
@@ -48,8 +47,7 @@ public class CreateReceveurServlet extends HttpServlet {
             r.setGenre(Genre.valueOf(request.getParameter("genre")));
             r.setGroupeSang(GroupeSang.valueOf(request.getParameter("groupeSang")));
             r.setUrgence(Urgence.valueOf(request.getParameter("urgence")));
-            r.setReceveurStatus(ReceveurStatus.valueOf(request.getParameter("receveurStatus")));
-            r.setDisponible(true);
+            r.setReceveurStatus(ReceveurStatus.En_attente);            r.setDisponible(true);
 
             receveurService.createReceveur(r);
 

@@ -11,7 +11,13 @@
     <h2 class="text-center text-danger mb-4">➕ Créer un Receveur</h2>
 
     <form action="${pageContext.request.contextPath}/createReceveur" method="post">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
         <h4 class="text-danger">Informations Personnelles</h4>
+        <a href="${pageContext.request.contextPath}/listReceveurs" class="btn btn-danger">
+            👥 Liste des Receveurs
+        </a>
+        </div>
         <hr>
 
         <div class="row mb-3">
@@ -44,9 +50,9 @@
             <div class="col">
                 <label class="form-label">Genre :</label>
                 <select name="genre" class="form-select" required>
-                    <c:forEach var="g" items="${genres}">
-                        <option value="${g}">${g}</option>
-                    </c:forEach>
+                    <option value="">-- Sélectionner --</option>
+                    <option value="Homme">Homme</option>
+                    <option value="Femme">Femme</option>
                 </select>
             </div>
         </div>
@@ -55,31 +61,30 @@
             <div class="col">
                 <label class="form-label">Groupe sanguin :</label>
                 <select name="groupeSang" class="form-select" required>
-                    <c:forEach var="gs" items="${groupesSang}">
-                        <option value="${gs}">${gs}</option>
-                    </c:forEach>
+                    <option value="">-- Sélectionner --</option>
+                    <option value="A_PLUS">A+</option>
+                    <option value="A_MOINS">A-</option>
+                    <option value="B_PLUS">B+</option>
+                    <option value="B_MOINS">B-</option>
+                    <option value="AB_PLUS">AB+</option>
+                    <option value="AB_MOINS">AB-</option>
+                    <option value="O_PLUS">O+</option>
+                    <option value="O_MOINS">O-</option>
                 </select>
             </div>
             <div class="col">
                 <label class="form-label">Urgence :</label>
                 <select name="urgence" class="form-select" required>
-                    <c:forEach var="u" items="${urgences}">
-                        <option value="${u}">${u}</option>
-                    </c:forEach>
+                    <option value="">-- Sélectionner --</option>
+                    <option value="Critique">Critique</option>
+                    <option value="Urgent">Urgent</option>
+                    <option value="Normal">Normal</option>
                 </select>
             </div>
         </div>
 
-        <div class="row mb-3">
-            <div class="col">
-                <label class="form-label">Statut :</label>
-                <select name="receveurStatus" class="form-select" required>
-                    <c:forEach var="s" items="${statuses}">
-                        <option value="${s}">${s}</option>
-                    </c:forEach>
-                </select>
-            </div>
-        </div>
+
+
 
         <div class="text-center mt-4">
             <button type="submit" class="btn btn-primary px-4">Créer</button>

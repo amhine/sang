@@ -57,6 +57,15 @@
         <url-pattern>/createReceveur</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ListReceveurServlet</servlet-name>
+        <servlet-class>banquesang.servlet.ListReceveurServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ListReceveurServlet</servlet-name>
+        <url-pattern>/listReceveurs</url-pattern>
+    </servlet-mapping>
 
 
 
