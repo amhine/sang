@@ -43,10 +43,7 @@
                 <label class="form-label">Date de naissance :</label>
                 <input type="date" name="datenaissance" class="form-control" value="${receveur.dateNaissance}" required>
             </div>
-            <div class="col">
-                <label class="form-label">Poids (kg) :</label>
-                <input type="number" name="poids" class="form-control" value="${receveur.poids}" required>
-            </div>
+
         </div>
 
         <div class="row mb-3">

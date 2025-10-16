@@ -77,4 +77,24 @@
         <url-pattern>/deleteReceveur</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>EditReceveurServlet</servlet-name>
+        <servlet-class>banquesang.servlet.EditReceveurServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditReceveurServlet</servlet-name>
+        <url-pattern>/editReceveur</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DonationServlet</servlet-name>
+        <servlet-class>banquesang.servlet.DonationServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DonationServlet</servlet-name>
+        <url-pattern>/DonationServlet</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>

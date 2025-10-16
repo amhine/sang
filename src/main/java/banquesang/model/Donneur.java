@@ -58,4 +58,12 @@ public class Donneur extends User {
 
     public Medical getMedical() { return medical; }
     public void setMedical(Medical medical) { this.medical = medical; }
+
+    @OneToOne(mappedBy = "donneur",cascade = CascadeType.ALL)
+    private Donation donation;
+
+    public Donation getDonation() {return donation;}
+
+    public void setDonation(Donation donation) {this.donation = donation;}
+
 }

@@ -41,6 +41,7 @@
                         <th>Urgence</th>
                         <th>Status</th>
                         <th>Disponibilité</th>
+                        <th>Donation</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -89,6 +90,15 @@
                                         <span class="badge bg-secondary">Indisponible</span>
                                     </c:otherwise>
                                 </c:choose>
+                            </td>
+                            <td>
+                                <!-- Nouveau bouton pour voir les donneurs compatibles -->
+                                <form action="${pageContext.request.contextPath}/DonationServlet" method="get" class="d-inline">
+                                    <input type="hidden" name="receveurId" value="${r.id}"/>
+                                    <button type="submit" class="btn btn-sm btn-success mb-1">
+                                        🩸 Voir Donneurs Compatibles
+                                    </button>
+                                </form>
                             </td>
                             <td>
                                 <a href="${pageContext.request.contextPath}/editReceveur?id=${r.id}"
