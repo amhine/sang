@@ -23,7 +23,6 @@ public class ListeDonneurServlet extends HttpServlet {
         try {
             List<Donneur> donneurs = donneurService.getAllDonneurs();
 
-            // ✅ LOG pour vérifier
             System.out.println("Nombre de donneurs récupérés : " + (donneurs != null ? donneurs.size() : 0));
             if (donneurs != null) {
                 for (Donneur d : donneurs) {

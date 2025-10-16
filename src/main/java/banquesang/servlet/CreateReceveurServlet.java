@@ -25,7 +25,6 @@ public class CreateReceveurServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Envoi des enums au formulaire JSP
         request.setAttribute("genres", Genre.values());
         request.setAttribute("groupesSang", GroupeSang.values());
         request.setAttribute("urgences", Urgence.values());
@@ -54,7 +53,6 @@ public class CreateReceveurServlet extends HttpServlet {
 
             receveurService.createReceveur(r);
 
-            // Redirection vers la liste après succès
             response.sendRedirect(request.getContextPath() + "/listReceveurs");
 
         } catch (Exception e) {
