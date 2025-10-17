@@ -1,6 +1,7 @@
 
 package banquesang.Dao;
 
+import banquesang.enums.Urgence;
 import banquesang.model.Donneur;
 import banquesang.model.Receveur;
 import banquesang.utils.JpaUtil;
@@ -21,6 +22,6 @@ public interface  ReceveurDao {
 
     public Receveur  findById(Long id) ;
 
-
-
+    public void verifierSatisfaction(Receveur receveur, int donsRecus) ;
+     int getBesoinPoches(Urgence urgence) ;
 }

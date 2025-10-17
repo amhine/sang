@@ -1,5 +1,10 @@
 package banquesang.Dao;
 
+import banquesang.enums.ReceveurStatus;
+import banquesang.enums.StatusDisponibilite;
+import banquesang.enums.Urgence;
+import banquesang.model.Donation;
+import banquesang.model.Donneur;
 import banquesang.model.Receveur;
 import banquesang.utils.JpaUtil;
 import jakarta.persistence.EntityManager;
@@ -65,10 +70,25 @@ public class ReceveurDaoImp implements ReceveurDao {
         EntityTransaction tx = em.getTransaction();
         try {
             tx.begin();
+
             Receveur receveur = em.find(Receveur.class, id);
             if (receveur != null) {
-                em.remove(receveur);
+                // Détacher les donations des donneurs
+                if (receveur.getDonations() != null) {
+                    for (Donation d : receveur.getDonations()) {
+                        Donneur donneur = d.getDonneur();
+                        if (donneur != null) {
+                            donneur.setStatusDisponibilite(StatusDisponibilite.Disponible);
+                            donneur.setDonation(null);
+                            em.merge(donneur);
+                        }
+                        em.remove(em.contains(d) ? d : em.merge(d));
+                    }
+                }
+                em.remove(em.contains(receveur) ? receveur : em.merge(receveur));
             }
+
+
             tx.commit();
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
@@ -77,6 +97,7 @@ public class ReceveurDaoImp implements ReceveurDao {
             em.close();
         }
     }
+
 
     @Override
     public Receveur findById(Long id) {
@@ -91,4 +112,24 @@ public class ReceveurDaoImp implements ReceveurDao {
         }
         return receveur;
     }
+    @Override
+    public void verifierSatisfaction(Receveur receveur, int donsRecus) {
+        int besoin = getBesoinPoches(receveur.getUrgence());
+
+        if (donsRecus >= besoin) {
+            receveur.setReceveurStatus(ReceveurStatus.Satisfait);
+            receveur.setDisponible(false);
+            update(receveur);
+        }
+    }
+    @Override
+    public int getBesoinPoches(Urgence urgence) {
+        if (urgence == null) return 1;
+        return switch (urgence) {
+            case Critique -> 4;
+            case Urgent -> 3;
+            case Normal -> 1;
+        };
+    }
+
 }

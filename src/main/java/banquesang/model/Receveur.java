@@ -5,6 +5,7 @@ import banquesang.enums.Urgence;
 import banquesang.enums.ReceveurStatus;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "receveurs")
@@ -23,8 +24,8 @@ public class Receveur extends User {
     public ReceveurStatus getReceveurStatus() { return receveurStatus; }
     public void setReceveurStatus(ReceveurStatus receveurStatus) { this.receveurStatus = receveurStatus; }
 
-    @OneToMany(mappedBy = "receveur", cascade = CascadeType.ALL)
-    private java.util.List<Donation> donations = new ArrayList<>();
+    @OneToMany(mappedBy = "receveur", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Donation> donations = new ArrayList<>();
 
     public java.util.List<Donation> getDonations() {
         return donations;

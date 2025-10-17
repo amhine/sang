@@ -1,11 +1,8 @@
 package banquesang.service;
 
 import banquesang.enums.ReceveurStatus;
-import banquesang.enums.Urgence;
 import banquesang.model.Receveur;
 import banquesang.Dao.ReceveurDaoImp;
-import banquesang.utils.JpaUtil;
-import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
@@ -38,23 +35,8 @@ public class ReceveurService {
         receveurDao.delete(id);
     }
     public void verifierSatisfaction(Receveur receveur, int donsRecus) {
-        int besoin = getBesoinPoches(receveur.getUrgence());
-
-        if (donsRecus >= besoin) {
-            receveur.setReceveurStatus(ReceveurStatus.Satisfait);
-            receveur.setDisponible(false);
-            receveurDao.update(receveur);
-        }
+        receveurDao.verifierSatisfaction(receveur, donsRecus);
     }
-    private int getBesoinPoches(Urgence urgence) {
-        switch (urgence) {
-            case Critique:
-                return 4;
-            case Urgent:
-                return 3;
-            default:
-                return 1;
-        }
     }
 
 
@@ -62,4 +44,4 @@ public class ReceveurService {
 
 
 
-}
+
