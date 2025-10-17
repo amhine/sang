@@ -46,6 +46,7 @@
                         </c:choose>
                     </td>
                     <td>1</td>
+
                     <td>
                         <!-- Un donneur = une seule poche -->
                         <form action="${pageContext.request.contextPath}/DonationServlet" method="post" class="d-flex justify-content-center">

@@ -31,7 +31,9 @@ public class ReceveurDaoImp implements ReceveurDao {
         EntityManager em = JpaUtil.getEntityManager();
         List<Receveur> receveurs = null;
         try {
-            TypedQuery<Receveur> query = em.createQuery("SELECT r FROM Receveur r", Receveur.class);
+            TypedQuery<Receveur> query = em.createQuery("SELECT DISTINCT r FROM Receveur r " +
+                    "LEFT JOIN FETCH r.donations d " +
+                    "LEFT JOIN FETCH d.donneur", Receveur.class);
             receveurs = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();

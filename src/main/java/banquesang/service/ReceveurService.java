@@ -4,6 +4,9 @@ import banquesang.enums.ReceveurStatus;
 import banquesang.enums.Urgence;
 import banquesang.model.Receveur;
 import banquesang.Dao.ReceveurDaoImp;
+import banquesang.utils.JpaUtil;
+import jakarta.persistence.EntityManager;
+
 import java.util.List;
 
 public class ReceveurService {
@@ -53,4 +56,10 @@ public class ReceveurService {
                 return 1;
         }
     }
+
+
+
+
+
+
 }

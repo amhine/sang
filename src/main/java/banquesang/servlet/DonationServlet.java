@@ -24,7 +24,17 @@ public class DonationServlet extends HttpServlet {
         receveurService = new ReceveurService();
     }
 
+
+
     @Override
+    //protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      //      throws ServletException, IOException {
+
+
+        //RequestDispatcher dispatcher = request.getRequestDispatcher("/receveur/listReceveurs.jsp");
+        //dispatcher.forward(request, response);
+    //}
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -51,6 +61,8 @@ public class DonationServlet extends HttpServlet {
         request.setAttribute("receveurs", receveurs);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/receveur/listReceveur.jsp");
         dispatcher.forward(request, response);    }
+
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

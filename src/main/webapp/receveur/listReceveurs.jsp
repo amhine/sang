@@ -41,7 +41,8 @@
                         <th>Urgence</th>
                         <th>Status</th>
                         <th>Disponibilité</th>
-                        <th>Donation</th>
+                        <th>Donneurs Associés</th>
+                        <th>Voir Donneurs Compatibles</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -83,7 +84,7 @@
                             </td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${r.disponible}">
+                                    <c:when test="${r.receveurStatus != 'Satisfait'}">
                                         <span class="badge bg-success">Disponible</span>
                                     </c:when>
                                     <c:otherwise>
@@ -92,7 +93,22 @@
                                 </c:choose>
                             </td>
                             <td>
-                                <!-- Nouveau bouton pour voir les donneurs compatibles -->
+                                <c:if test="${not empty r.donations}">
+                                    <c:forEach var="d" items="${r.donations}">
+                                        <span class="badge bg-info text-dark mb-1">
+                                            ${d.donneur.nom} ${d.donneur.prenom}
+                                        </span>
+                                        <br/>
+                                    </c:forEach>
+                                </c:if>
+                                <c:if test="${empty r.donations}">
+                                    <span class="text-muted">Aucun donneur</span>
+                                </c:if>
+                            </td>
+
+
+                            <td>
+                                <!-- Bouton pour voir les donneurs compatibles -->
                                 <form action="${pageContext.request.contextPath}/DonationServlet" method="get" class="d-inline">
                                     <input type="hidden" name="receveurId" value="${r.id}"/>
                                     <button type="submit" class="btn btn-sm btn-success mb-1">
