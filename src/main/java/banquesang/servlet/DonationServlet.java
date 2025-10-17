@@ -27,13 +27,7 @@ public class DonationServlet extends HttpServlet {
 
 
     @Override
-    //protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      //      throws ServletException, IOException {
 
-
-        //RequestDispatcher dispatcher = request.getRequestDispatcher("/receveur/listReceveurs.jsp");
-        //dispatcher.forward(request, response);
-    //}
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

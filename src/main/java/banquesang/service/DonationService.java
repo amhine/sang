@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 public class DonationService {
 
-    // Retourne les donneurs compatibles avec un receveur
     public List<Donneur> getDonneursCompatibles(Receveur receveur) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
@@ -37,7 +36,6 @@ public class DonationService {
         }
     }
 
-    // Retourne les receveurs compatibles avec un donneur
     public List<Receveur> getReceveursCompatibles(Donneur donneur) {
         EntityManager em = JpaUtil.getEntityManager();
         try {
@@ -60,7 +58,6 @@ public class DonationService {
         }
     }
 
-    // Associe un donneur à un receveur si compatible et disponible
     public boolean associerDonneurReceveur(Donneur donneur, Receveur receveur) {
         if (donneur == null || receveur == null) return false;
         if (!CompatibiliteService.isCompatible(donneur.getGroupeSang(), receveur.getGroupeSang())) return false;
@@ -71,7 +68,6 @@ public class DonationService {
         try {
             em.getTransaction().begin();
 
-            // Récupérer le receveur avec ses donations dans la session active
             Receveur receveurManaged = em.createQuery(
                             "SELECT r FROM Receveur r LEFT JOIN FETCH r.donations WHERE r.id = :id",
                             Receveur.class)
@@ -84,7 +80,6 @@ public class DonationService {
                 return false;
             }
 
-            // Création de la donation
             Donation donation = new Donation();
             donation.setDonneur(donneur);
             donation.setReceveur(receveurManaged);
@@ -93,12 +88,10 @@ public class DonationService {
             donneur.setDonation(donation);
             donneur.setStatusDisponibilite(StatusDisponibilite.Non_disponible);
 
-            // Si le nombre de poches est atteint, mettre le receveur à Satisfait
             if (receveurManaged.getDonations().size() >= nombrePochesNecessaires) {
                 receveurManaged.setReceveurStatus(ReceveurStatus.Satisfait);
             }
 
-            // Persist et merge
             em.persist(donation);
             em.merge(donneur);
             em.merge(receveurManaged);
@@ -115,7 +108,6 @@ public class DonationService {
         }
     }
 
-    // Détermine le nombre de poches nécessaires selon l'urgence
     private int getNombrePochesParUrgence(Urgence urgence) {
         if (urgence == null) return 1;
         return switch (urgence) {
