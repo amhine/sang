@@ -13,10 +13,10 @@
     <form action="${pageContext.request.contextPath}/createReceveur" method="post">
         <div class="d-flex justify-content-between align-items-center mb-4">
 
-        <h4 class="text-danger">Informations Personnelles</h4>
-        <a href="${pageContext.request.contextPath}/listReceveurs" class="btn btn-danger">
-            👥 Liste des Receveurs
-        </a>
+            <h4 class="text-danger">Informations Personnelles</h4>
+            <a href="${pageContext.request.contextPath}/listReceveurs" class="btn btn-danger">
+                👥 Liste des Receveurs
+            </a>
         </div>
         <hr>
 

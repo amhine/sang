@@ -51,7 +51,7 @@ public class EditDonneurServlet extends HttpServlet {
             d.setGroupeSang(GroupeSang.valueOf(request.getParameter("groupesang")));
 
             Medical m = d.getMedical();
-            if  (m == null) {
+            if (m == null) {
                 m = new Medical();
             }
             m.setHepatiteB(request.getParameter("hepatiteB") != null);
@@ -61,7 +61,7 @@ public class EditDonneurServlet extends HttpServlet {
             m.setGrossesse(request.getParameter("grossesse") != null);
             m.setAllaitement(request.getParameter("allaitement") != null);
             d.setMedical(m);
-
+            donneurService.mettreAJourDisponibilite(d);
             donneurService.modifierDonneur(d);
 
             response.sendRedirect(request.getContextPath() + "/listDonneurs");
