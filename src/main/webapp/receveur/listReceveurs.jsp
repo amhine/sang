@@ -17,14 +17,12 @@
         </a>
     </div>
 
-    <!-- Si aucun receveur -->
     <c:if test="${empty receveurs}">
         <div class="alert alert-warning text-center">
             Aucun receveur trouvé.
         </div>
     </c:if>
 
-    <!-- Si liste non vide -->
     <c:if test="${not empty receveurs}">
         <div class="card shadow-sm">
             <div class="card-body">

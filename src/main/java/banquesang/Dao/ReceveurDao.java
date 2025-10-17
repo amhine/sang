@@ -2,11 +2,7 @@
 package banquesang.Dao;
 
 import banquesang.enums.Urgence;
-import banquesang.model.Donneur;
 import banquesang.model.Receveur;
-import banquesang.utils.JpaUtil;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 public interface  ReceveurDao {

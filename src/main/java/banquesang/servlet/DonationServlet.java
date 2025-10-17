@@ -61,19 +61,14 @@ public class DonationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        System.out.println("🩸 [DonationServlet] doPost() appelé");
-
         try {
             Long donneurId = Long.parseLong(request.getParameter("donneurId"));
             Long receveurId = Long.parseLong(request.getParameter("receveurId"));
-            System.out.println("➡️ donneurId=" + donneurId + ", receveurId=" + receveurId);
 
             Donneur donneur = donneurService.getDonneurById(donneurId);
             Receveur receveur = receveurService.getReceveurById(receveurId);
 
             boolean success = donationService.associerDonneurReceveur(donneur, receveur);
-            System.out.println("✅ Résultat association : " + success);
 
             if (success) {
                 response.sendRedirect(request.getContextPath() + "/DonationServlet?receveurId=" + receveurId);

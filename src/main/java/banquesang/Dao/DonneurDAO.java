@@ -1,9 +1,6 @@
 package banquesang.Dao;
 
 import banquesang.model.Donneur;
-import banquesang.utils.JpaUtil;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 public interface DonneurDAO {

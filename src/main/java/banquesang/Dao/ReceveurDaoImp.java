@@ -73,7 +73,6 @@ public class ReceveurDaoImp implements ReceveurDao {
 
             Receveur receveur = em.find(Receveur.class, id);
             if (receveur != null) {
-                // Détacher les donations des donneurs
                 if (receveur.getDonations() != null) {
                     for (Donation d : receveur.getDonations()) {
                         Donneur donneur = d.getDonneur();
