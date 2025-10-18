@@ -7,6 +7,27 @@
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 </head>
 <body class="bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold text-white" href="index.jsp">🩸 Banque de Sang</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/listDonneurs">Donneurs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link "href="${pageContext.request.contextPath}/listReceveurs">Receveurs</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
