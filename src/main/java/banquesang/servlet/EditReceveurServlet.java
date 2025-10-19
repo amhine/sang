@@ -3,6 +3,7 @@ package banquesang.servlet;
 import banquesang.model.Receveur;
 import banquesang.enums.Genre;
 import banquesang.enums.GroupeSang;
+import banquesang.enums.Urgence;
 import banquesang.service.ReceveurService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -32,13 +33,15 @@ public class EditReceveurServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             Long id = Long.parseLong(request.getParameter("id"));
             Receveur r = receveurService.getReceveurById(id);
+
+            Urgence oldUrgence = r.getUrgence();
+            GroupeSang oldGroupeSang = r.getGroupeSang();
 
             r.setNom(request.getParameter("nom"));
             r.setPrenom(request.getParameter("prenom"));
@@ -47,10 +50,9 @@ public class EditReceveurServlet extends HttpServlet {
             r.setDateNaissance(LocalDate.parse(request.getParameter("datenaissance")));
             r.setGenre(Genre.valueOf(request.getParameter("genre")));
             r.setGroupeSang(GroupeSang.valueOf(request.getParameter("groupesang")));
+            r.setUrgence(Urgence.valueOf(request.getParameter("urgence")));
 
-
-
-            receveurService.updateReceveur(r);
+            receveurService.updateReceveurWithAdjustments(r, oldUrgence, oldGroupeSang);
 
             response.sendRedirect(request.getContextPath() + "/listReceveurs");
 
