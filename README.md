@@ -1,99 +1,130 @@
-# Système de Gestion de Banque de Sang
 
-## Description du Projet
 
-Ce projet est une application web monolithique développée en Java Enterprise Edition (JEE) pour gérer efficacement les opérations d'une banque de sang. Elle vise à automatiser la gestion des donneurs et des receveurs, en intégrant des règles métier strictes pour la compatibilité sanguine et les urgences médicales. L'application résout les défis des processus manuels traditionnels en offrant une interface intuitive pour la création, la visualisation et la mise à jour des profils, tout en assurant la traçabilité des associations entre donneurs et receveurs.
+# 🩸 Système de Gestion de Banque de Sang
 
-## Objectifs
+## 🔹 Description
 
-- **Optimiser la gestion des données** : Centraliser les informations personnelles, médicales et logistiques des donneurs et receveurs pour une prise de décision rapide.
-- **Automatiser le matching** : Appliquer une matrice de compatibilité sanguine pour associer automatiquement les donneurs disponibles aux receveurs prioritaires, en tenant compte des niveaux d'urgence (Critique, Urgent, Normal).
-- **Assurer la conformité médicale** : Valider l'éligibilité des donneurs via des critères automatisés (âge, poids, contre-indications) et gérer les statuts de disponibilité et de satisfaction des receveurs.
-- **Améliorer l'expérience utilisateur** : Fournir des interfaces web responsives avec validations en temps réel et des listes triées par priorité pour une navigation fluide.
-- **Promouvoir la scalabilité** : Utiliser une architecture MVC multicouches pour faciliter les extensions futures, comme la pagination ou les analytics.
+Ce projet est une application web **monolithique** développée en **Java Enterprise Edition (JEE)** pour gérer efficacement les opérations d'une banque de sang.
+Elle automatise la gestion des **donneurs** et **receveurs**, en intégrant des règles de compatibilité sanguine et de suivi médical.
 
-## Architecture en Couches
+L'application permet de :
 
-L'application suit une architecture MVC (Model-View-Controller) multicouches pour une séparation claire des responsabilités, respectant les principes SOLID et le Repository Pattern. Voici les couches principales :
+* Créer, visualiser et mettre à jour les profils des donneurs et receveurs.
+* Assurer la compatibilité et l’éligibilité des dons.
+* Prioriser les receveurs en fonction du niveau d’urgence (Critique, Urgent, Normal).
 
-- **Couche Présentation (View)** : Gérée par des pages JSP avec JSTL pour le rendu dynamique. Les vues affichent les formulaires, listes et alertes d'erreurs, en utilisant Bootstrap pour un design responsive et moderne.
-  
-- **Couche Contrôleur (Controller)** : Implémentée via des Servlets (ex. : `EditReceveurServlet`, `ListReceveursServlet`) qui interceptent les requêtes HTTP, valident les entrées et orchestrent les appels vers les services. Les mappings sont configurés dans `web.xml` sans annotations.
+---
 
-- **Couche Service (Business Logic)** : Contient la logique métier dans des classes comme `ReceveurService` et `DonneurService`. Elle gère les règles de validation (compatibilité sanguine, éligibilité), les calculs (besoin en poches de sang) et les ajustements automatiques (statuts de disponibilité).
+## 🎯 Objectifs
 
-- **Couche Accès aux Données (DAO/Repository)** : Utilise JPA/Hibernate pour l'accès persistant via des interfaces comme `ReceveurDao`. Les méthodes CRUD (Create, Read, Update, Delete) et les requêtes JPQL assurent l'encapsulation de l'accès à la base de données.
+* **Optimisation des données** : Centralisation des informations personnelles et médicales.
+* **Matching automatique** : Association des donneurs disponibles aux receveurs prioritaires.
+* **Conformité médicale** : Vérification de l’éligibilité des donneurs (âge, poids, contre-indications).
+* **Expérience utilisateur améliorée** : Interface web responsive avec validations et listes triées.
+* **Scalabilité** : Architecture MVC multicouches pour faciliter les extensions futures.
 
-- **Couche Modèle (Model)** : Entités JPA annotées (ex. : `@Entity` pour `Receveur`, `Donneur`, `Donation`) modélisant les relations (OneToMany entre Receveur et Donations).
+---
 
-Cette structure permet une maintenance aisée, avec un flux typique : Requête HTTP → Servlet → Service → DAO → JPA → Base de données.
+## 🏛 Architecture
 
-## Technologies Utilisées
+L’application suit le modèle **MVC (Model-View-Controller)** :
 
-- **Langage** : Java 17 .
-- **Serveur Web** : Apache Tomcat pour le déploiement.
-- **Vue** : JSP  pour les templates dynamiques .
-- **Build et Dépendances** : Maven pour la gestion des artefacts (pom.xml inclut Hibernate, JPA, JUnit).
-- **Base de Données** :  JPA/Hibernate pour l'ORM (fichier `persistence.xml` configuré pour l'unité de persistance).
-- **Tests** : JUnit pour les tests unitaires (au moins 2 : un pour la validation d'éligibilité des donneurs, un pour la compatibilité sanguine).
+### 1. Couche Présentation (View)
 
-## Structure des Classes
+* **JSP + JSTL** pour l’affichage dynamique.
+* Design responsive avec **Bootstrap**.
 
-Le projet est organisé en paquets Maven standards. Voici une vue détaillée :
+### 2. Couche Contrôleur (Controller)
 
-### Paquet `banquesang.model` (Entités JPA)
-- `Donneur` : Attributs (nom, prénom, téléphone, cin, dateNaissance, poids, genre, groupeSang, medical, statusDisponibilite). Relations : `@OneToOne` avec `Donation`.
-- `Receveur` : Attributs (nom, prénom, téléphone, cin, dateNaissance, genre, groupeSang, urgence, receveurStatus, disponible). Relations : `@OneToMany` avec `Donation`.
-- `Donation` : Entité de liaison (id, pocheCount=1). Relations : `@ManyToOne` avec `Donneur` et `Receveur`.
-- `Medical` : Attributs booléens (hepatiteB, hepatiteC, vih, diabete, grossesse, allaitement). `@OneToOne` avec `Donneur`.
+* **Servlets** pour gérer les requêtes HTTP (`ListReceveursServlet`, `EditReceveurServlet`).
+* Validation et orchestration des appels aux services.
 
-### Paquet `banquesang.enums`
-- `GroupeSang` : Enum pour A+, A-, B+, B-, AB+, AB-, O+, O-.
-- `Genre` : Enum (Homme, Femme).
-- `StatusDisponibilite` : Enum (Disponible, NonDisponible, NonEligible).
-- `Urgence` : Enum (Critique=4 poches, Urgent=3, Normal=1).
-- `ReceveurStatus` : Enum (EnAttente, Satisfait).
+### 3. Couche Service (Business Logic)
 
-### Paquet `banquesang.Dao`
-- `ReceveurDao` / `DonneurDao` : Interfaces pour CRUD.
-- `ReceveurDaoImp` / `DonneurDaoImp` : Implémentations avec EntityManager, JPQL pour requêtes .
+* Logique métier dans `DonneurService` et `ReceveurService`.
+* Gestion de l’éligibilité, compatibilité sanguine et ajustements des statuts.
 
-### Paquet `banquesang.service`
-- `ReceveurService` / `DonneurService` : Logique métier (create, update, verifier).
+### 4. Couche Accès aux Données (DAO/Repository)
 
-### Paquet `banquesang.servlet`
-- `ListReceveursServlet`, `EditReceveurServlet`, etc. : Gestion des requêtes GET/POST.
+* **JPA/Hibernate** pour la persistance.
+* CRUD et requêtes JPQL via `DonneurDaoImp` et `ReceveurDaoImp`.
 
-### Ressources
-- `src/main/resources/META-INF/persistence.xml` : Configuration JPA .
-- `web.xml` : Mappings de servlets et filtres.
+### 5. Couche Modèle (Model)
 
-Diagramme de classes (UML) : [Voir diagramme_uml.png](diagramme_uml.png)
+* Entités **JPA** : `Donneur`, `Receveur`, `Donation`, `Medical`.
+* Relations OneToOne et OneToMany.
 
-## Fonctionnalités Principales
+---
 
-- **Création de Profils** : Formulaires JSP pour donneurs (avec validations médicales) et receveurs (avec sélection d'urgence).
-- **Listes Dynamiques** :
-  - Donneurs : Tableau avec infos personnelles, statut, infos médicales ;  actions (éditer/supprimer).
-  - Receveurs : Tableau avec infos personnelle ; affichage des donneurs associés ; bouton "Voir Compatibles" pour matching;  actions (éditer/supprimer).
-- **Matching Automatisé** : Affichage des donneurs compatibles (basé sur matrice sanguine) et disponibles pour un receveur ; association unidirectionnelle (1 don=1 poche).
+## 🛠 Technologies Utilisées
 
-## Captures d'Écran
+| Technologie     | Usage                            |
+| --------------- | -------------------------------- |
+| Java 17         | Langage principal                |
+| Apache Tomcat   | Serveur web                      |
+| JSP / JSTL      | Templates dynamiques             |
+| Maven           | Gestion des dépendances et build |
+| JPA / Hibernate | ORM pour la base de données      |
+| JUnit           | Tests unitaires                  |
 
-![Page de Création Donneur](screenshots/create_donneur.png)  
-*Formulaire de création de donneur avec validations médicales.*
+---
 
-![Liste des Donneurs](screenshots/list_donneurs.png)  
-*Tableau des donneurs avec statuts et actions.*
+## 📂 Structure du Projet
 
-![Page de Création Receveur](screenshots/create_receveur.png)  
-*Formulaire de création de receveur avec sélection d'urgence.*
+* **banquesang.model** : Entités JPA (`Donneur`, `Receveur`, `Donation`, `Medical`)
+* **banquesang.enums** : Enumérations (`GroupeSang`, `Genre`, `StatusDisponibilite`, `Urgence`, `ReceveurStatus`)
+* **banquesang.dao** : Interfaces et implémentations pour CRUD
+* **banquesang.service** : Logique métier
+* **banquesang.servlet** : Servlets pour les requêtes HTTP
 
-![Liste des Receveurs](screenshots/list_receveurs.png)  
-*Tableau trié par urgence avec donneurs associés.*
+---
 
-![Matching Compatibles](screenshots/matching_compatibles.png)  
-*Vue des donneurs compatibles pour un receveur critique.*
+## ⚙️ Installation et Exécution
 
-![Diagramme UML](screenshots/diagramme_classes.png)  
-*Diagramme de classes des entités principales.*
+```bash
+# Cloner le repository
+git clone https://github.com/amhine/sang.git
+cd sang
+
+# Build avec Maven
+mvn clean package
+
+# Déployer sur Tomcat
+mvn tomcat7:deploy
+
+# Accéder à l'application
+# http://localhost:8080/sang
+
+# Lancer les tests unitaires
+mvn test
+```
+
+---
+
+## 📝 Fonctionnalités
+
+* **Gestion des profils** : Créer, modifier, supprimer donneurs et receveurs.
+* **Liste dynamique** : Affichage des donneurs et receveurs avec tri par urgence et statut.
+* **Matching automatique** : Donneurs compatibles affichés pour chaque receveur selon matrice sanguine et disponibilité.
+* **Validation médicale** : Vérification automatique des contre-indications et statut d’éligibilité.
+
+---
+
+## 📷 Captures d’Écran
+
+| Page                 | Capture                                                        |
+| -------------------- | -------------------------------------------------------------- |
+| Création Donneur     | ![create\_donneur](screenshots/create_donneur.png)             |
+| Liste des Donneurs   | ![list\_donneurs](screenshots/list_donneurs.png)               |
+| Création Receveur    | ![create\_receveur](screenshots/create_receveur.png)           |
+| Liste des Receveurs  | ![list\_receveurs](screenshots/list_receveurs.png)             |
+| Matching Compatibles | ![matching\_compatibles](screenshots/matching_compatibles.png) |
+| Diagramme UML        | ![uml](screenshots/diagramme_classes.png)                      |
+
+---
+
+## 📈 Diagramme UML
+
+[Voir diagramme_uml.png](screenshots/diagramme_classes.png)
+
+---
