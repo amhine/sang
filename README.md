@@ -1,4 +1,4 @@
-
+<img width="1074" height="791" alt="Capture d’écran du 2025-10-20 14-52-47" src="https://github.com/user-attachments/assets/b5d605d5-757c-4d2a-b93f-045c3b999bd7" />
 
 # 🩸 Système de Gestion de Banque de Sang
 
@@ -111,20 +111,26 @@ mvn test
 ---
 
 ## 📷 Captures d’Écran
-
-| Page                 | Capture                                                        |
-| -------------------- | -------------------------------------------------------------- |
-| Création Donneur     | ![create\_donneur](screenshots/create_donneur.png)             |
-| Liste des Donneurs   | ![list\_donneurs](screenshots/list_donneurs.png)               |
-| Création Receveur    | ![create\_receveur](screenshots/create_receveur.png)           |
-| Liste des Receveurs  | ![list\_receveurs](screenshots/list_receveurs.png)             |
-| Matching Compatibles | ![matching\_compatibles](screenshots/matching_compatibles.png) |
-| Diagramme UML        | ![uml](screenshots/diagramme_classes.png)                      |
+* **Création Donneur** 
+<img width="1074" height="791" alt="Capture d’écran du 2025-10-20 14-52-47" src="https://github.com/user-attachments/assets/7024d571-3461-418c-b0ee-b1b4f3ef7a00" />
+            
+* **Liste des Donneurs** 
+   <img width="1346" height="917" alt="Capture d’écran du 2025-10-20 14-53-59" src="https://github.com/user-attachments/assets/0e72338f-b4a4-477f-a22b-7b1a80616cad" />
+           
+* **Création Receveur** 
+ <img width="1131" height="663" alt="Capture d’écran du 2025-10-20 14-56-13" src="https://github.com/user-attachments/assets/52208e38-27f3-4a10-923f-6f5816720cca" />
+          
+* **Liste des Receveurs**
+  <img width="1369" height="656" alt="Capture d’écran du 2025-10-20 14-56-43" src="https://github.com/user-attachments/assets/227e0b9d-492e-431a-ab41-65703df7f44b" />
+           
+ * **Matching Compatibles**
+    <img width="1369" height="656" alt="Capture d’écran du 2025-10-20 14-57-20" src="https://github.com/user-attachments/assets/14ce9f35-c9dd-4486-8aeb-bc57f8b52bfd" />
+ 
 
 ---
 
 ## 📈 Diagramme UML
 
-[Voir diagramme_uml.png](screenshots/diagramme_classes.png)
+<img width="983" height="551" alt="Capture d’écran du 2025-10-20 12-27-42" src="https://github.com/user-attachments/assets/3e0d8f3d-e6f4-4b5d-9e9b-9bac18bba07e" />
 
 ---
