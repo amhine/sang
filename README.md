@@ -20,7 +20,7 @@ L'application suit une architecture MVC (Model-View-Controller) multicouches pou
   
 - **Couche Contrôleur (Controller)** : Implémentée via des Servlets (ex. : `EditReceveurServlet`, `ListReceveursServlet`) qui interceptent les requêtes HTTP, valident les entrées et orchestrent les appels vers les services. Les mappings sont configurés dans `web.xml` sans annotations.
 
-- **Couche Service (Business Logic)** : Contient la logique métier dans des classes comme `ReceveurService` et `DonneurService`. Elle gère les règles de validation (compatibilité sanguine, éligibilité), les calculs (besoin en poches de sang) et les ajustements automatiques (statuts de disponibilité/satisfaction).
+- **Couche Service (Business Logic)** : Contient la logique métier dans des classes comme `ReceveurService` et `DonneurService`. Elle gère les règles de validation (compatibilité sanguine, éligibilité), les calculs (besoin en poches de sang) et les ajustements automatiques (statuts de disponibilité).
 
 - **Couche Accès aux Données (DAO/Repository)** : Utilise JPA/Hibernate pour l'accès persistant via des interfaces comme `ReceveurDao`. Les méthodes CRUD (Create, Read, Update, Delete) et les requêtes JPQL assurent l'encapsulation de l'accès à la base de données.
 
@@ -30,13 +30,12 @@ Cette structure permet une maintenance aisée, avec un flux typique : Requête H
 
 ## Technologies Utilisées
 
-- **Langage** : Java 8+ avec Collections API et Stream API pour les traitements de listes.
+- **Langage** : Java 17 .
 - **Serveur Web** : Apache Tomcat pour le déploiement.
-- **Vue** : JSP + JSTL pour les templates dynamiques ; Bootstrap 5 pour le CSS et les icônes (Bootstrap Icons).
+- **Vue** : JSP  pour les templates dynamiques .
 - **Build et Dépendances** : Maven pour la gestion des artefacts (pom.xml inclut Hibernate, JPA, JUnit).
-- **Base de Données** : MySQL avec JPA/Hibernate pour l'ORM (fichier `persistence.xml` configuré pour l'unité de persistance).
+- **Base de Données** :  JPA/Hibernate pour l'ORM (fichier `persistence.xml` configuré pour l'unité de persistance).
 - **Tests** : JUnit pour les tests unitaires (au moins 2 : un pour la validation d'éligibilité des donneurs, un pour la compatibilité sanguine).
-- **Autres** : Logging via SLF4J ; Gestion d'erreurs avec exceptions et alertes Bootstrap.
 
 ## Structure des Classes
 
@@ -57,30 +56,27 @@ Le projet est organisé en paquets Maven standards. Voici une vue détaillée :
 
 ### Paquet `banquesang.Dao`
 - `ReceveurDao` / `DonneurDao` : Interfaces pour CRUD.
-- `ReceveurDaoImp` / `DonneurDaoImp` : Implémentations avec EntityManager, JPQL pour requêtes (ex. : findAll avec JOIN FETCH).
+- `ReceveurDaoImp` / `DonneurDaoImp` : Implémentations avec EntityManager, JPQL pour requêtes .
 
 ### Paquet `banquesang.service`
-- `ReceveurService` / `DonneurService` : Logique métier (create, updateWithAdjustments, verifierSatisfaction, isCompatible).
+- `ReceveurService` / `DonneurService` : Logique métier (create, update, verifier).
 
 ### Paquet `banquesang.servlet`
 - `ListReceveursServlet`, `EditReceveurServlet`, etc. : Gestion des requêtes GET/POST.
 
 ### Ressources
-- `src/main/resources/META-INF/persistence.xml` : Configuration JPA (provider Hibernate, dialect MySQL).
+- `src/main/resources/META-INF/persistence.xml` : Configuration JPA .
 - `web.xml` : Mappings de servlets et filtres.
 
 Diagramme de classes (UML) : [Voir diagramme_uml.png](diagramme_uml.png)
 
 ## Fonctionnalités Principales
 
-- **Création de Profils** : Formulaires JSP pour donneurs (avec validations médicales) et receveurs (avec sélection d'urgence). Vérification automatique de l'éligibilité.
+- **Création de Profils** : Formulaires JSP pour donneurs (avec validations médicales) et receveurs (avec sélection d'urgence).
 - **Listes Dynamiques** :
-  - Donneurs : Tableau avec infos personnelles, statut, infos médicales ; tri par disponibilité ; actions (éditer/supprimer).
-  - Receveurs : Tableau trié par urgence décroissante ; affichage des donneurs associés ; bouton "Voir Compatibles" pour matching.
+  - Donneurs : Tableau avec infos personnelles, statut, infos médicales ;  actions (éditer/supprimer).
+  - Receveurs : Tableau avec infos personnelle ; affichage des donneurs associés ; bouton "Voir Compatibles" pour matching;  actions (éditer/supprimer).
 - **Matching Automatisé** : Affichage des donneurs compatibles (basé sur matrice sanguine) et disponibles pour un receveur ; association unidirectionnelle (1 don=1 poche).
-- **Gestion des Statuts** : Calcul automatique (éligibilité donneur, satisfaction receveur). Ajustements lors de modifications (suppression de dons excédentaires ou incompatibles).
-- **Validations et Erreurs** : Regex pour téléphone/CIN ; alertes pour contre-indications ; messages d'erreur en JSP.
-- **Bonus Implémentés** : Filtrage par groupe sanguin ; Pagination sur listes (via paramètres de requête).
 
 ## Captures d'Écran
 
