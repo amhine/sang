@@ -1,4 +1,3 @@
-<img width="1074" height="791" alt="Capture d’écran du 2025-10-20 14-52-47" src="https://github.com/user-attachments/assets/b5d605d5-757c-4d2a-b93f-045c3b999bd7" />
 
 # 🩸 Système de Gestion de Banque de Sang
 
